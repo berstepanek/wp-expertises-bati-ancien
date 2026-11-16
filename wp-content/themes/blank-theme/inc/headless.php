@@ -8,13 +8,18 @@ defined('ABSPATH') || exit;
  *   define('HEADLESS_FRONTEND_URL', 'https://mon-site.com');
  *   define('HEADLESS_PREVIEW_SECRET', 'une-cle-secrete');
  */
-defined('HEADLESS_FRONTEND_URL') || define('HEADLESS_FRONTEND_URL', 'http://localhost:3000');
+defined('HEADLESS_FRONTEND_URL') || define('HEADLESS_FRONTEND_URL', 'https://expertises-bati-ancien.fr');
 
 /**
  * Redirige tout le front WordPress vers Next.js.
  * L'admin, /graphql, l'API REST, AJAX et cron ne sont pas touchés.
+ * Inactif tant que HEADLESS_FRONTEND_URL n'est pas défini.
  */
 add_action('template_redirect', static function (): void {
+    if (!defined('HEADLESS_FRONTEND_URL')) {
+        return;
+    }
+
     $skip = is_admin()
         || wp_doing_ajax()
         || wp_doing_cron()
@@ -32,10 +37,10 @@ add_action('template_redirect', static function (): void {
 
 /**
  * Bouton « Prévisualiser » → route de preview Next.js (Draft Mode).
- * Actif seulement si HEADLESS_PREVIEW_SECRET est défini.
+ * Actif seulement si HEADLESS_FRONTEND_URL et HEADLESS_PREVIEW_SECRET sont définis.
  */
 add_filter('preview_post_link', static function (string $link, WP_Post $post): string {
-    if (!defined('HEADLESS_PREVIEW_SECRET')) {
+    if (!defined('HEADLESS_PREVIEW_SECRET') || !defined('HEADLESS_FRONTEND_URL')) {
         return $link;
     }
 

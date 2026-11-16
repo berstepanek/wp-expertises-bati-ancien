@@ -84,7 +84,17 @@ final class PostType
 function post_types(): array
 {
     return [
-         new PostType([
+        new PostType([
+            'key'            => 'expertises',
+            'singular'       => 'Expertise',
+            'plural'         => 'Expertises',
+            'feminine'       => false,
+            'slug'           => 'expertises',
+            'icon'           => 'dashicons-groups',
+            'graphql_single' => 'expertise',
+            'graphql_plural' => 'expertises',
+        ])
+        /*new PostType([
             'key'            => 'projects',
             'singular'       => 'Project',
             'plural'         => 'Projects',
@@ -123,7 +133,7 @@ function post_types(): array
             'icon'           => 'dashicons-building',
             'graphql_single' => 'theatre',
             'graphql_plural' => 'theatres',
-        ]),
+        ]),*/
     ];
 }
 
