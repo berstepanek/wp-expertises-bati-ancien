@@ -93,7 +93,19 @@ function post_types(): array
             'icon'           => 'dashicons-groups',
             'graphql_single' => 'expertise',
             'graphql_plural' => 'expertises',
+        ]),
+        new PostType([
+            'key'            => 'faqs',
+            'singular'       => 'Faq',
+            'plural'         => 'Faqs',
+            'feminine'       => false,
+            'slug'           => 'faqs',
+            'icon'           => 'dashicons-groups',
+            'graphql_single' => 'faq',
+            'graphql_plural' => 'faqs',
         ])
+
+        
         /*new PostType([
             'key'            => 'projects',
             'singular'       => 'Project',
